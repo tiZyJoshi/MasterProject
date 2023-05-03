@@ -1,3 +1,5 @@
+from .g_data import GData
+from .g_data_factory import GDataFactory
 from .g_energietraeger import GEnergietraeger
 from .g_energietraeger_factory import GEnergietraegerFactory
 from .g_energietraeger_klasse import GEnergietraegerKlasse

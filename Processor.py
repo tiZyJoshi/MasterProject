@@ -1,37 +1,34 @@
-from Domain.General import GEnergietraeger, GLand, GSektor, GEnergietraegerFactory, GLaenderFactory, GSektorenFactory
-from Domain.Nutzenergieanalyse import NEAData
+from Domain.Nutzenergieanalyse import NEAData, NEADataFactory, NEAAbschnitteFactory, NEASektorenFactory, \
+    NEABereicheFactory
+from Domain.General import GData, GDataFactory
 
-
-class GeneralData:
-    def __init__(self, laender: dict[str, GLand], sektoren: dict[str, GSektor],
-                 energietraeger: dict[str, GEnergietraeger]):
-        self.laender = laender
-        self.sektoren = sektoren
-        self.energietraeger = energietraeger
-
-
-class GeneralDataFactory:
-    def __init__(self, laender_factory: GLaenderFactory, sektoren_factory: GSektorenFactory,
-                 energietraeger_factory: GEnergietraegerFactory):
-        self.__laender_factory = laender_factory
-        self.__sektoren_factory = sektoren_factory
-        self.__energietraeger_factory = energietraeger_factory
-
-    def create(self):
-        laender = self.__laender_factory.create()
-        sektoren = self.__sektoren_factory.create()
-        energietraeger = self.__energietraeger_factory.create()
-        return GeneralData(laender, sektoren, energietraeger)
+from Nutzenergieanalyse import NEADataValidator
 
 
 class ProcessorFactory:
-    def __init__(self, general_data_factory: GeneralDataFactory):
+    def __init__(self, general_data_factory: GDataFactory, nea_abschnitte_factory: NEAAbschnitteFactory,
+                 nea_sektoren_factory: NEASektorenFactory, nea_bereiche_factory: NEABereicheFactory,
+                 nea_data_factory: NEADataFactory):
         self.__general_data_factory = general_data_factory
+        self.__nea_abschnitte_factory = nea_abschnitte_factory
+        self.__nea_sektoren_factory = nea_sektoren_factory
+        self.__nea_bereiche_factory = nea_bereiche_factory
+        self.__nea_data_factory = nea_data_factory
 
     def create(self):
-        pass
+        general_data = self.__general_data_factory.create()
+        nea_abschnitte = self.__nea_abschnitte_factory.create()
+        nea_sektoren = self.__nea_sektoren_factory.create()
+        nea_bereiche = self.__nea_bereiche_factory.create()
+        nea_data = self.__nea_data_factory.create(nea_abschnitte, nea_sektoren, nea_bereiche)
+        return Processor(general_data, nea_data)
 
 
 class Processor:
-    def __init__(self, general_data: GeneralData, nea_data: NEAData):
+    def __init__(self, general_data: GData, nea_data: NEAData):
         self.__nea_data = nea_data
+
+    def run(self):
+        validator = NEADataValidator(self.__nea_data)
+        total_sum = validator.create_total_sum()
+        print(total_sum)
