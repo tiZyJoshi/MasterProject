@@ -1,22 +1,21 @@
-from Domain.Nutzenergieanalyse import NEAFile, NEAAbschnitt, NEASektor, NEABereich, NEAAbschnittDataFactory, \
-    NEAAbschnittDataframesFactory, NEAAbschnittDictionaryFactory, NEAData, NEADataFactory, NEAFilesFactory
+from Domain.Nutzenergieanalyse import NEAFile, NEAAbschnitt, NEASektor, NEABereich, NEAData, NEADataFactory, \
+    NEAFilesFactory
+
+from .nea_abschnitt_data_factory import NEAAbschnittDataFactory
+from .nea_abschnitt_dictionary_factory import NEAAbschnittDictionaryFactory
+from .nea_abschnitt_dataframes_factory import NEAAbschnittDataframesFactory
 
 
 class NEADataNewFactory(NEADataFactory):
-    def __init__(self,
-                 files_factory: NEAFilesFactory,
-                 data_factory: NEAAbschnittDataFactory,
-                 dictionary_factory: NEAAbschnittDictionaryFactory,
-                 dataframes_factory: NEAAbschnittDataframesFactory):
+    def __init__(self, files_factory: NEAFilesFactory):
         self.__files_factory = files_factory
-        self.__data_factory = data_factory
-        self.__dictionary_factory = dictionary_factory
-        self.__dataframes_factory = dataframes_factory
+        self.__data_factory = NEAAbschnittDataFactory()
+        self.__dictionary_factory = NEAAbschnittDictionaryFactory()
+        self.__dataframes_factory = NEAAbschnittDataframesFactory()
 
     def __load(self, file: NEAFile, abschnitt: NEAAbschnitt, sektoren: list[NEASektor], bereiche: list[NEABereich]):
         abschnitt_data_fields = self.__data_factory.create(file, abschnitt, sektoren, bereiche)
-        abschnitt_dictionary = self.__dictionary_factory.create(abschnitt.jahre, sektoren, bereiche,
-                                                                abschnitt_data_fields)
+        abschnitt_dictionary = self.__dictionary_factory.create(abschnitt.jahre, sektoren, abschnitt_data_fields)
         abschnitt_dataframes = self.__dataframes_factory.create(abschnitt, sektoren, bereiche, abschnitt_dictionary)
         return abschnitt_dataframes
 

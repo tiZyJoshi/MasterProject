@@ -1,5 +1,4 @@
-from Domain.Energiebilanz import EBLand, EBSektor
-from Domain.Energiebilanz.eb_data import EBData
+from Domain.Energiebilanz import EBLand, EBSektor, EBData
 
 
 class NEADataValidator:

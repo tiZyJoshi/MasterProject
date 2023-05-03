@@ -1,8 +1,8 @@
 import pandas as pd
 
 from Domain.Energiebilanz import EBSektor
-from Energiebilanz.eb_file_dataframes import EBFileDataframes
-from Energiebilanz.eb_file_dictionary import EBFileDictionary
+from .eb_file_dataframes import EBFileDataframes
+from .eb_file_dictionary import EBFileDictionary
 
 
 class EBFileDataframesFactory:

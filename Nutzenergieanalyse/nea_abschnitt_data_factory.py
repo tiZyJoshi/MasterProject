@@ -1,10 +1,10 @@
 import pandas as pd
 
-from Domain.Nutzenergieanalyse import NEAFile, NEAAbschnitt, NEASektor, NEABereich, NEAAbschnittDataFactory, \
-    NEADataField
+from Domain.Nutzenergieanalyse import NEAFile, NEAAbschnitt, NEASektor, NEABereich
+from .nea_datafield import NEADataField
 
 
-class NEAAbschnittDataDefaultFactory(NEAAbschnittDataFactory):
+class NEAAbschnittDataFactory:
     @staticmethod
     def __load(file: NEAFile, abschnitt: NEAAbschnitt, sektoren: list[NEASektor], bereiche: list[NEABereich]):
         with pd.ExcelFile(file.path) as xls:

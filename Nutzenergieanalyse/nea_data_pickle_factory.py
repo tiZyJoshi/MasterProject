@@ -1,17 +1,19 @@
+import pathlib
+
 import pandas as pd
 
-from Domain.Nutzenergieanalyse import NEALand, NEAAbschnitt, NEASektor, NEABereich, NEAData, NEADataFactory, \
-    NEASerializationFolderFactory
+from Domain.Nutzenergieanalyse import NEALand, NEAAbschnitt, NEASektor, NEABereich, NEAData, NEADataFactory
+from .nea_pickle_path_factory import NEAPicklePathFactory
 
 
 class NEADataPickleFactory(NEADataFactory):
-    def __init__(self, folder_factory: NEASerializationFolderFactory, laender: list[NEALand]):
+    def __init__(self, path: pathlib.Path, laender: list[NEALand]):
         self.__laender = laender
-        self.__folder_factory = folder_factory
+        self.__path_factory = NEAPicklePathFactory(path)
 
     def __read_nea_pickle(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor, bereich: NEABereich):
-        ser_path = self.__folder_factory.create(land, abschnitt, sektor)
-        return pd.read_pickle(ser_path / f'{bereich.name}.pkl')
+        ser_path = self.__path_factory.create(land, abschnitt, sektor, bereich)
+        return pd.read_pickle(ser_path)
 
     def __restore_nea_sektor_dataframes(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor,
                                         bereiche: list[NEABereich]):

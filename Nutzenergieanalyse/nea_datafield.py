@@ -2,9 +2,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from .nea_energietraeger import NEAEnergietraeger
-from .nea_jahr import NEAJahr
-from .nea_sektor import NEASektor
+from Domain.Nutzenergieanalyse import NEAEnergietraeger, NEAJahr, NEASektor
 
 
 @dataclass

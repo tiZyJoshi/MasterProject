@@ -1,10 +1,9 @@
 import pathlib
 
 from Domain.Energiebilanz import EBLand, EBSektor
-from Domain.Energiebilanz.eb_serialization_folder_factory import EBSerializationFolderFactory
 
 
-class EBSerializationFolderDefaultFactory(EBSerializationFolderFactory):
+class EBPicklePathFactory:
     def __init__(self, path: pathlib.Path):
         self.__path = path
         self.__folder_name = 'Energiebilanz'
@@ -23,5 +22,5 @@ class EBSerializationFolderDefaultFactory(EBSerializationFolderFactory):
 
     def create(self, land: EBLand, sektor: EBSektor) -> pathlib.Path:
         nea_serialization_folder = self.__create_eb_serialization_folder(land)
-        folder = nea_serialization_folder / sektor.name
-        return folder
+        path = nea_serialization_folder / f'{sektor.name}.pkl'
+        return path

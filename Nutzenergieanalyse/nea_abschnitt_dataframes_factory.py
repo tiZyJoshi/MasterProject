@@ -1,10 +1,11 @@
 import pandas as pd
 
-from Domain.Nutzenergieanalyse import NEAJahr, NEASektor, NEAEnergietraeger, NEABereich, NEAAbschnitt, \
-    NEAAbschnittDataframes, NEAAbschnittDictionary, NEAAbschnittDataframesFactory
+from Domain.Nutzenergieanalyse import NEAJahr, NEASektor, NEAEnergietraeger, NEABereich, NEAAbschnitt
+from .nea_abschnitt_dataframes import NEAAbschnittDataframes
+from .nea_abschnitt_dictionary import NEAAbschnittDictionary
 
 
-class NEAAbschnittDataframesDefaultFactory(NEAAbschnittDataframesFactory):
+class NEAAbschnittDataframesFactory:
     @staticmethod
     def __create_series_data(jahre: list[NEAJahr], sektor: NEASektor, et: NEAEnergietraeger,
                              abschnitt_dictionary: NEAAbschnittDictionary) -> dict[NEAJahr, pd.Series]:

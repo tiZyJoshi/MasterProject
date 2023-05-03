@@ -1,6 +1,6 @@
 from Domain.Energiebilanz import EBSektor
-from Domain.Energiebilanz.eb_datafield import EBDataField
-from Energiebilanz.eb_file_dictionary import EBFileDictionary
+from .eb_datafield import EBDataField
+from .eb_file_dictionary import EBFileDictionary
 
 
 class EBFileDictionaryFactory:

@@ -2,8 +2,7 @@ import pathlib
 
 import pandas as pd
 
-from Domain.Energiebilanz.eb_data import EBData
-from Domain.Energiebilanz.eb_data_serializer import EBDataSerializer
+from Domain.Energiebilanz import EBData, EBDataSerializer
 
 
 class EBExcelSerializer(EBDataSerializer):

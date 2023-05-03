@@ -20,12 +20,7 @@ def setup_processor():
     nea_bereiche_factory = Nutzenergieanalyse.NEABereicheDefaultFactory()
     nea_files_factory = Nutzenergieanalyse.NEAFilesDefaultFactory(pathlib.Path('Data/Nutzenergieanalyse'),
                                                                   g_data.laender)
-    nea_abschnitt_data_factory = Nutzenergieanalyse.NEAAbschnittDataDefaultFactory()
-    nea_abschnitt_dictionary_factory = Nutzenergieanalyse.NEAAbschnittDictionaryDefaultFactory()
-    nea_abschnitt_dataframes_factory = Nutzenergieanalyse.NEAAbschnittDataframesDefaultFactory()
-    nea_data_factory = Nutzenergieanalyse.NEADataNewFactory(nea_files_factory, nea_abschnitt_data_factory,
-                                                            nea_abschnitt_dictionary_factory,
-                                                            nea_abschnitt_dataframes_factory)
+    nea_data_factory = Nutzenergieanalyse.NEADataNewFactory(nea_files_factory)
 
     factory = Processor.ProcessorFactory(nea_abschnitte_factory, nea_sektoren_factory, nea_bereiche_factory,
                                          nea_data_factory)

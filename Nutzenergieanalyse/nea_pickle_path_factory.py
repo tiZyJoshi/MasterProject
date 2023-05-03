@@ -1,9 +1,9 @@
 import pathlib
 
-from Domain.Nutzenergieanalyse import NEAAbschnitt, NEALand, NEASektor, NEASerializationFolderFactory
+from Domain.Nutzenergieanalyse import NEAAbschnitt, NEALand, NEASektor, NEABereich
 
 
-class NEASerializationFolderDefaultFactory(NEASerializationFolderFactory):
+class NEAPicklePathFactory:
     def __init__(self, path: pathlib.Path):
         self.__path = path
         self.__prefix = 'Nutzenenergieanalyse_'
@@ -20,7 +20,8 @@ class NEASerializationFolderDefaultFactory(NEASerializationFolderFactory):
         folder = land_serialization_folder / self.__create_folder_name(abschnitt)
         return folder
 
-    def create(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor) -> pathlib.Path:
+    def create(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor, bereich: NEABereich) -> pathlib.Path:
         nea_serialization_folder = self.__create_nea_serialization_folder(land, abschnitt)
-        folder = nea_serialization_folder / sektor.name
-        return folder
+        sektor_folder = nea_serialization_folder / sektor.name
+        path = sektor_folder / f'{bereich.name}.pkl'
+        return path

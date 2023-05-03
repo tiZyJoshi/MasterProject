@@ -2,8 +2,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from .eb_energietraeger import EBEnergietraeger
-from .eb_sektor import EBSektor
+from Domain.Energiebilanz import EBEnergietraeger, EBSektor
 
 
 @dataclass

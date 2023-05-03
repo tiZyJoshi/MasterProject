@@ -1,6 +1,5 @@
 import pandas as pd
 
-from .nea_bereich import NEABereich
-from .nea_sektor import NEASektor
+from Domain.Nutzenergieanalyse import NEABereich, NEASektor
 
 NEAAbschnittDataframes = dict[NEASektor, dict[NEABereich, pd.DataFrame]]
