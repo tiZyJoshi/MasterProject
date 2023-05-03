@@ -1,7 +1,4 @@
-from Nutzenergieanalyse.nea_abschnitt import NEAAbschnitt
-from Nutzenergieanalyse.nea_data import NEAData
-from Nutzenergieanalyse.nea_land import NEALand
-from Nutzenergieanalyse.nea_sektor import NEASektor
+from Domain.Nutzenergieanalyse import NEAAbschnitt, NEALand, NEASektor, NEAData
 
 
 class NEADataValidator:
@@ -9,7 +6,7 @@ class NEADataValidator:
         self.__data = data
 
     def __create_sektor_sum(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor):
-        return sum(self.__data.get(land, abschnitt, sektor, bereich) for bereich in self.__data.bereiche)
+        return sum(self.__data[land][abschnitt][sektor][bereich] for bereich in self.__data.bereiche)
 
     def __create_sektor_sums(self, land: NEALand, abschnitt: NEAAbschnitt):
         return {sektor: self.__create_sektor_sum(land, abschnitt, sektor) for sektor in self.__data.sektoren}
