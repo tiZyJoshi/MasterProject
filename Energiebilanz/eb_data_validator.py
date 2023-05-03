@@ -1,7 +1,7 @@
 from Domain.Energiebilanz import EBLand, EBSektor, EBData
 
 
-class NEADataValidator:
+class EBDataValidator:
     @staticmethod
     def __create_sektor_sum(land: EBLand, sektoren: list[EBSektor], data: EBData):
         return sum(data.data[land][sektor] for sektor in sektoren)
