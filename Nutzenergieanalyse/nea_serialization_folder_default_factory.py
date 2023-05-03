@@ -20,7 +20,7 @@ class NEASerializationFolderDefaultFactory(NEASerializationFolderFactory):
         folder = land_serialization_folder / self.__create_folder_name(abschnitt)
         return folder
 
-    def create(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor):
+    def create(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor) -> pathlib.Path:
         nea_serialization_folder = self.__create_nea_serialization_folder(land, abschnitt)
         folder = nea_serialization_folder / sektor.name
         return folder
