@@ -23,5 +23,5 @@ class NEAPicklePathFactory:
     def create(self, land: NEALand, abschnitt: NEAAbschnitt, sektor: NEASektor, bereich: NEABereich) -> pathlib.Path:
         nea_serialization_folder = self.__create_nea_serialization_folder(land, abschnitt)
         sektor_folder = nea_serialization_folder / sektor.name
-        path = sektor_folder / f'{bereich.name}.pkl'
+        path = sektor_folder / f'{bereich.name_bereinigt}.pkl'
         return path

@@ -18,6 +18,6 @@ class EBDataPickleFactory(EBDataFactory):
     def __restore_eb_dataframes(self, land: EBLand, sektoren: list[EBSektor]):
         return {sektor: self.__read_eb_pickle(land, sektor) for sektor in sektoren}
 
-    def create(self, sektoren: list[EBSektor], energietraeger: list[EBEnergietraeger]) -> EBData:
+    def create(self, energietraeger: list[EBEnergietraeger], sektoren: list[EBSektor]) -> EBData:
         return EBData(self.__laender, energietraeger, sektoren, {
             land: self.__restore_eb_dataframes(land, sektoren) for land in self.__laender})

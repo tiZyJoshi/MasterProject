@@ -11,11 +11,11 @@ class EBPicklePathFactory:
     def __create_folder_name(self):
         return f'{self.__folder_name}'
 
-    def __create_land_serialization_folder(self, land: EBLand):
+    def __create_land_serialization_folder(self, land: EBLand) -> pathlib.Path:
         folder = self.__path / land.name
         return folder
 
-    def __create_eb_serialization_folder(self, land: EBLand):
+    def __create_eb_serialization_folder(self, land: EBLand) -> pathlib.Path:
         land_serialization_folder = self.__create_land_serialization_folder(land)
         folder = land_serialization_folder / self.__folder_name
         return folder
