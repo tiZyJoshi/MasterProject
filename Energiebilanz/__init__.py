@@ -4,5 +4,6 @@ from .eb_data_validator import EBDataValidator
 from .eb_energietraeger_default_factory import EBEnergietraegerDefaultFactory
 from .eb_excel_serializer import EBExcelSerializer
 from .eb_files_default_factory import EBFilesDefaultFactory
+from .eb_laender_default_factory import EBLaenderDefaultFactory
 from .eb_pickle_serializer import EBPickleSerializer
 from .eb_sektoren_default_factory import EBSektorenDefaultFactory

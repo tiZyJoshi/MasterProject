@@ -1,7 +1,4 @@
-from .g_laender_factory import GLaenderFactory
-from .g_sektoren_factory import GSektorenFactory
-from .g_energietraeger_factory import GEnergietraegerFactory
-from .g_data import GData
+from Domain.General import GLaenderFactory, GSektorenFactory, GEnergietraegerFactory, GData
 
 
 class GDataFactory:

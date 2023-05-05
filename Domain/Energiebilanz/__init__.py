@@ -6,5 +6,6 @@ from .eb_energietraeger_factory import EBEnergietraegerFactory
 from .eb_file import EBFile
 from .eb_files_factory import EBFilesFactory
 from .eb_land import EBLand
+from .eb_laender_factory import EBLaenderFactory
 from .eb_sektor import EBSektor
 from .eb_sektoren_factory import EBSektorenFactory
