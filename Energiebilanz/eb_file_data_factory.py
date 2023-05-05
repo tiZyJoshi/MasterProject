@@ -34,11 +34,11 @@ class EBFileDataFactory:
                     print(f'{et} empty')
                     local_df = pd.concat(self.__create_empty_data(sektoren), axis=1)
 
-                local_df.index = pd.PeriodIndex(local_df.index, freq='A', name=et.name)
+                local_df.index = pd.PeriodIndex(local_df.index, freq='A', name=et.entspricht.name)
 
                 for sektor in sektoren:
                     series = local_df[sektor.name]
-                    series.name = et.name
+                    series.name = et.entspricht.name
                     yield EBDataField(sektor, et, series)
 
     def create(self, file: EBFile, energietraeger: list[EBEnergietraeger], sektoren: list[EBSektor]) -> \
