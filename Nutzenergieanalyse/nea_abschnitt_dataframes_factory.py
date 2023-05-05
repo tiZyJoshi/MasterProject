@@ -15,7 +15,7 @@ class NEAAbschnittDataframesFactory:
                         abschnitt_dictionary: NEAAbschnittDictionary):
         data = self.__create_series_data(jahre, sektor, et, abschnitt_dictionary)
         index = pd.PeriodIndex((jahr.value for jahr in jahre), freq='A')
-        return pd.Series((data[jahr][bereich.name] for jahr in data.keys()), index, name=et.name)
+        return pd.Series((data[jahr][bereich.name] for jahr in data.keys()), index, name=et.entspricht.name)
 
     def __create_dataframe(self, abschnitt: NEAAbschnitt, sektor: NEASektor, bereich: NEABereich,
                            abschnitt_dictionary: NEAAbschnittDictionary) -> pd.DataFrame:

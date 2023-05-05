@@ -60,6 +60,7 @@ class NEAAbschnitteDefaultFactory(NEAAbschnitteFactory):
                               # NEAEnergietraeger('', self.__energietraeger['Braunkohlen-Briketts']),
                               NEAEnergietraeger('Brenntorf', self.__energietraeger['Brenntorf']),
                               NEAEnergietraeger('Koks', self.__energietraeger['Koks']),
+                              # NEAEnergietraeger('Petrolkoks', self.__energietraeger['Koks']),
                               NEAEnergietraeger('Steinkohle', self.__energietraeger['Steinkohle']),
                               NEAEnergietraeger('Benzin', self.__energietraeger['Benzin']),
                               NEAEnergietraeger('Diesel', self.__energietraeger['Diesel']),
