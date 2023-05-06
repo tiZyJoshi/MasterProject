@@ -1,5 +1,6 @@
 from .nea_abschnitte_default_factory import NEAAbschnitteDefaultFactory
 from .nea_bereiche_default_factory import NEABereicheDefaultFactory
+from .nea_bereich_klassen_default_factory import NEABereichKlassenDefaultFactory
 from .nea_data_new_factory import NEADataNewFactory
 from .nea_data_pickle_factory import NEADataPickleFactory
 from .nea_data_validator import NEADataValidator

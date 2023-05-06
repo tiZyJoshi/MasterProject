@@ -35,7 +35,9 @@ def setup_nea_pickle_factory(g_data: Domain.General.GData):
 def setup_nea_processor(g_data: Domain.General.GData, ):
     nea_abschnitte_factory = Nutzenergieanalyse.NEAAbschnitteDefaultFactory(g_data.energietraeger)
     nea_sektoren_factory = Nutzenergieanalyse.NEASektorenDefaultFactory(g_data.sektoren)
-    nea_bereiche_factory = Nutzenergieanalyse.NEABereicheDefaultFactory()
+    nea_bereich_klassen_factory = Nutzenergieanalyse.NEABereichKlassenDefaultFactory()
+    nea_bereich_klassen = nea_bereich_klassen_factory.create()
+    nea_bereiche_factory = Nutzenergieanalyse.NEABereicheDefaultFactory(nea_bereich_klassen)
     nea_data_factory = setup_nea_new_factory(g_data)
     factory = Processor.NEAProcessorFactory(nea_abschnitte_factory, nea_sektoren_factory, nea_bereiche_factory,
                                             nea_data_factory)

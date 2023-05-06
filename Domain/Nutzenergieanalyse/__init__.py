@@ -2,6 +2,8 @@ from .nea_abschnitt import NEAAbschnitt
 from .nea_abschnitte_factory import NEAAbschnitteFactory
 from .nea_bereich import NEABereich
 from .nea_bereiche_factory import NEABereicheFactory
+from .nea_bereich_klasse import NEABereichKlasse
+from .nea_bereich_klassen_factory import NEABereichKlassenFactory
 from .nea_data import NEAData
 from .nea_data_factory import NEADataFactory
 from .nea_data_serializer import NEADataSerializer
