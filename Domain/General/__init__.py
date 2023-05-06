@@ -1,3 +1,5 @@
+from .g_bereich import GBereich
+from .g_bereiche_factory import GBereicheFactory
 from .g_data import GData
 from .g_energietraeger import GEnergietraeger
 from .g_energietraeger_factory import GEnergietraegerFactory

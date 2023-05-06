@@ -9,10 +9,9 @@ class NEAPickleSerializer(NEADataSerializer):
         self.__path_factory = NEAPicklePathFactory(path)
 
     def run(self, data: NEAData):
-        for land in data.laender:
-            for abschnitt in data.abschnitte:
-                for sektor in data.sektoren:
-                    for bereich in data.bereiche:
-                        ser_path = self.__path_factory.create(land, abschnitt, sektor, bereich)
-                        ser_path.parent.mkdir(parents=True, exist_ok=True)
-                        data.data[land][abschnitt][sektor][bereich].to_pickle(ser_path)
+        for land in data.data.keys():
+            for sektor in data.data[land].keys():
+                for bereich in data.data[land][sektor].keys():
+                    ser_path = self.__path_factory.create(land, sektor, bereich)
+                    ser_path.parent.mkdir(parents=True, exist_ok=True)
+                    data.data[land][sektor][bereich].to_pickle(ser_path)

@@ -1,10 +1,7 @@
-from .nea_abschnitt import NEAAbschnitt
-from .nea_sektor import NEASektor
-from .nea_bereich import NEABereich
 from .nea_data import NEAData
+from Domain.General import GData
 
 
 class NEADataFactory:
-    def create(self, abschnitte: list[NEAAbschnitt], sektoren: list[NEASektor],
-               bereiche: list[NEABereich]) -> NEAData:
+    def create(self, g_data: GData) -> NEAData:
         pass

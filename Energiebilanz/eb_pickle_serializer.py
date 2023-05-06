@@ -10,8 +10,8 @@ class EBPickleSerializer(EBDataSerializer):
         self.__path_factory = EBPicklePathFactory(path)
 
     def run(self, data: EBData):
-        for land in data.laender:
-            for sektor in data.sektoren:
+        for land in data.data.keys():
+            for sektor in data.data[land].keys():
                 ser_path = self.__path_factory.create(land, sektor)
                 ser_path.parent.mkdir(parents=True, exist_ok=True)
                 data.data[land][sektor].to_pickle(ser_path)

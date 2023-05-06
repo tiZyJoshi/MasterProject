@@ -19,6 +19,4 @@ class EBDataNewFactory(EBDataFactory):
 
     def create(self, energietraeger: list[EBEnergietraeger], sektoren: list[EBSektor]) -> EBData:
         files = self.__files_factory.create()
-        laender = list([file.land for file in files])
-        return EBData(laender, energietraeger, sektoren, {
-            file.land: self.__load(file, energietraeger, sektoren) for file in files})
+        return EBData({file.land.entspricht: self.__load(file, energietraeger, sektoren) for file in files})

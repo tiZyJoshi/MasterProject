@@ -1,5 +1,5 @@
 import pandas as pd
 
-from Domain.Nutzenergieanalyse import NEABereich, NEASektor
+from Domain.General import GBereich, GSektor
 
-NEAAbschnittDataframes = dict[NEASektor, dict[NEABereich, pd.DataFrame]]
+NEAAbschnittDataframes = dict[GSektor, dict[GBereich, pd.DataFrame]]

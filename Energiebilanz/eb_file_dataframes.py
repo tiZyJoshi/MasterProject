@@ -1,5 +1,5 @@
 import pandas as pd
 
-from Domain.Energiebilanz import EBSektor
+from Domain.General import GSektor
 
-EBFileDataframes = dict[EBSektor, pd.DataFrame]
+EBFileDataframes = dict[GSektor, pd.DataFrame]

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from Domain.Nutzenergieanalyse import NEAEnergietraeger, NEAJahr, NEASektor
+from Domain.Nutzenergieanalyse import NEAJahr, NEASektor, NEAEnergietraeger
 
 
 @dataclass
