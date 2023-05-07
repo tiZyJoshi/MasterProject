@@ -1,5 +1,6 @@
 from .g_alle_laender_factory import GAlleLaenderFactory
 from .g_bereiche_default_factory import GBereicheDefaultFactory
+from .g_bereiche_simple_factory import GBereicheSimpleFactory
 from .g_bundeslaender_factory import GBundeslaenderFactory
 from .g_data_factory import GDataFactory
 from .g_energietraeger_default_factory import GEnergietraegerDefaultFactory

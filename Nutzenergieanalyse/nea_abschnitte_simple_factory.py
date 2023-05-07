@@ -1,9 +1,9 @@
 from Domain.General import GData
-from Domain.Nutzenergieanalyse import NEAAbschnitt, NEAJahr, NEAEnergietraeger, NEAAbschnitteFactory, NEASektor, \
-    NEABereich
+from Domain.Nutzenergieanalyse import NEAAbschnitteFactory, NEAAbschnitt, NEABereich, NEASektor, NEAEnergietraeger, \
+    NEAJahr
 
 
-class NEAAbschnitteDefaultFactory(NEAAbschnitteFactory):
+class NEAAbschnitteSimpleFactory(NEAAbschnitteFactory):
     def create(self, g_data: GData) -> list[NEAAbschnitt]:
         bereiche = g_data.bereiche
 
@@ -15,38 +15,13 @@ class NEAAbschnitteDefaultFactory(NEAAbschnitteFactory):
                             NEABereich('Beleuchtung und EDV', bereiche['Strom']),
                             NEABereich('Elektrochemie', bereiche['Strom'])]
 
-        add_bereiche_default = [NEABereich('Kochen', bereiche['Kochen']),
-                                NEABereich('Warmwasser', bereiche['Warmwasser'])]
-
-        bereiche_haushalte_ab_2005 = [NEABereich('Raumwärme', bereiche['Heizen']),
-                                      NEABereich('Warmwasser', bereiche['Warmwasser']),
-                                      NEABereich('Kochen', bereiche['Kochen']),
-                                      NEABereich('Kühlen und Gefrieren', bereiche['Strom']),
-                                      NEABereich('Großgeräte', bereiche['Strom']),
-                                      NEABereich('Haushalts-kleingeräte', bereiche['Strom']),
-                                      NEABereich('Büro- und Unter-haltungselektronik', bereiche['Strom']),
-                                      NEABereich('Beleuchtung', bereiche['Strom']),
-                                      NEABereich('Sonstiges', bereiche['Strom']),
-                                      NEABereich('Verkehr', bereiche['Strom'])]
-
-        add_bereiche_haushalte_ab_2005 = [NEABereich('Warmwasser und Kochen', bereiche['Warmwasser und Kochen'])]
-
         sektoren = g_data.sektoren
 
-        sektoren_vor_2005 = [
-            NEASektor('Wohngebäude', 602, 'A:H', bereiche_default, add_bereiche_default, sektoren['Wohngebäude']),
-            NEASektor('Dienstleistungsgebäude', 576, 'A:H', bereiche_default, add_bereiche_default,
-                      sektoren['Dienstleistungsgebäude']),
-            NEASektor('Landwirtschaftsgebäude', 628, 'A:H', bereiche_default, add_bereiche_default,
-                      sektoren['Landwirtschaftsgebäude'])]
-
-        sektoren_ab_2005 = [
-            NEASektor('Wohngebäude', 602, 'U:AE', bereiche_haushalte_ab_2005, add_bereiche_haushalte_ab_2005,
-                      sektoren['Wohngebäude']),
-            NEASektor('Dienstleistungsgebäude', 576, 'A:H', bereiche_default, add_bereiche_default,
-                      sektoren['Dienstleistungsgebäude']),
-            NEASektor('Landwirtschaftsgebäude', 628, 'A:H', bereiche_default, add_bereiche_default,
-                      sektoren['Landwirtschaftsgebäude'])]
+        sektoren_default = [NEASektor('Wohngebäude', 602, 'A:H', bereiche_default, [], sektoren['Wohngebäude']),
+                            NEASektor('Dienstleistungsgebäude', 576, 'A:H', bereiche_default, [],
+                                      sektoren['Dienstleistungsgebäude']),
+                            NEASektor('Landwirtschaftsgebäude', 628, 'A:H', bereiche_default, [],
+                                      sektoren['Landwirtschaftsgebäude'])]
 
         energietraeger = g_data.energietraeger
 
@@ -98,19 +73,16 @@ class NEAAbschnitteDefaultFactory(NEAAbschnitteFactory):
                               NEAJahr('NEA 96', '1996'),
                               NEAJahr('NEA 97', '1997'),
                               NEAJahr('NEA 98', '1998')],
-                             sektoren_vor_2005,
+                             sektoren_default,
                              et_vor_1999),
-                NEAAbschnitt('1999_bis_2004',
+                NEAAbschnitt('ab_1999',
                              [NEAJahr('NEA 99', '1999'),
                               NEAJahr('NEA 2000', '2000'),
                               NEAJahr('NEA 2001', '2001'),
                               NEAJahr('NEA 2002', '2002'),
                               NEAJahr('NEA 2003', '2003'),
-                              NEAJahr('NEA 2004', '2004')],
-                             sektoren_vor_2005,
-                             et_ab_1999),
-                NEAAbschnitt('ab_2005',
-                             [NEAJahr('NEA 2005', '2005'),
+                              NEAJahr('NEA 2004', '2004'),
+                              NEAJahr('NEA 2005', '2005'),
                               NEAJahr('NEA 2006', '2006'),
                               NEAJahr('NEA 2007', '2007'),
                               NEAJahr('NEA 2008', '2008'),
@@ -126,5 +98,5 @@ class NEAAbschnitteDefaultFactory(NEAAbschnitteFactory):
                               NEAJahr('NEA 2018', '2018'),
                               NEAJahr('NEA 2019', '2019'),
                               NEAJahr('NEA 2020', '2020')],
-                             sektoren_ab_2005,
+                             sektoren_default,
                              et_ab_1999)]

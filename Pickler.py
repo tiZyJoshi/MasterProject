@@ -23,7 +23,8 @@ def setup_general_data(g_laender_factory: Domain.General.GLaenderFactory):
 def setup_nea_new_factory(g_data: Domain.General.GData):
     nea_files_factory = Nutzenergieanalyse.NEAFilesDefaultFactory(pathlib.Path('Data/Nutzenergieanalyse'),
                                                                   g_data.laender)
-    nea_data_factory = Nutzenergieanalyse.NEADataNewFactory(nea_files_factory)
+    nea_abschnitte_factory = Nutzenergieanalyse.NEAAbschnitteSimpleFactory()
+    nea_data_factory = Nutzenergieanalyse.NEADataNewFactory(nea_files_factory, nea_abschnitte_factory)
     return nea_data_factory
 
 
@@ -44,9 +45,7 @@ def setup_eb_new_factory(g_data: Domain.General.GData):
     return eb_data_factory
 
 
-def setup_eb_pickle_factory(g_data: Domain.General.GData):
-    eb_laender_factory = Energiebilanz.EBLaenderDefaultFactory()
-    eb_laender = eb_laender_factory.create(g_data.laender)
+def setup_eb_pickle_factory():
     eb_data_factory = Energiebilanz.EBDataPickleFactory(pathlib.Path('Data/Serialization'))
     return eb_data_factory
 
@@ -83,7 +82,7 @@ def setup_b_processor(g_data: Domain.General.GData):
 
 def pickle_all(g_laender_factory: Domain.General.GLaenderFactory):
     g_sektoren_factory = General.GSektorenDefaultFactory()
-    g_bereiche_factory = General.GBereicheDefaultFactory()
+    g_bereiche_factory = General.GBereicheSimpleFactory()
     g_energietraeger_klassen_factory = General.GEnergietraegerKlassenDefaultFactory()
     g_energietraeger_klassen = g_energietraeger_klassen_factory.create()
     g_energietraeger_factory = General.GEnergietraegerDefaultFactory(g_energietraeger_klassen)
@@ -91,11 +90,11 @@ def pickle_all(g_laender_factory: Domain.General.GLaenderFactory):
                                           g_energietraeger_factory)
     g_data = g_data_factory.create()
 
-    #nea_processor = setup_nea_processor(g_data)
-    #nea_processor.run_pickle_serialization()
+    nea_processor = setup_nea_processor(g_data)
+    nea_processor.run_pickle_serialization()
 
     eb_processor = setup_eb_processor(g_data)
     eb_processor.run_pickle_serialization()
 
-    #b_processor = setup_b_processor(g_data)
-    #b_processor.run_pickle_serialization()
+    b_processor = setup_b_processor(g_data)
+    b_processor.run_pickle_serialization()
