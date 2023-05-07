@@ -8,6 +8,7 @@ from .nea_datafield import NEADataField
 class NEAAbschnittDataFactory:
     @staticmethod
     def __load(file: NEAFile, abschnitt: NEAAbschnitt):
+        print(f'Starting {file.land.name}')
         with pd.ExcelFile(file.path) as xls:
             for jahr in abschnitt.jahre:
                 print(f'Starting {jahr}')

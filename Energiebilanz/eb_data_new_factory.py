@@ -2,11 +2,13 @@ from Domain.Energiebilanz import EBFilesFactory, EBFile, EBEnergietraeger, EBSek
 from .eb_file_data_factory import EBFileDataFactory
 from .eb_file_dataframes_factory import EBFileDataframesFactory
 from .eb_file_dictionary_factory import EBFileDictionaryFactory
+from .eb_energietraeger_default_factory import EBEnergietraegerDefaultFactory
 
 
 class EBDataNewFactory(EBDataFactory):
     def __init__(self, files_factory: EBFilesFactory):
         self.__files_factory = files_factory
+        self.__energietraeger_factory = EBEnergietraegerDefaultFactory()
         self.__data_factory = EBFileDataFactory()
         self.__dictionary_factory = EBFileDictionaryFactory()
         self.__dataframes_factory = EBFileDataframesFactory()

@@ -11,8 +11,7 @@ from Bevoelkerung import BPickleSerializer
 
 
 class NEAProcessorFactory:
-    def __init__(self, nea_abschnitte_factory: NEAAbschnitteFactory, nea_data_factory: NEADataFactory):
-        self.__nea_abschnitte_factory = nea_abschnitte_factory
+    def __init__(self, nea_data_factory: NEADataFactory):
         self.__nea_data_factory = nea_data_factory
 
     def create(self, g_data: GData):
@@ -45,8 +44,8 @@ class EBProcessorFactory:
         self.__eb_sektoren_factory = eb_sektoren_factory
         self.__eb_data_factory = eb_data_factory
 
-    def create(self):
-        eb_energietraeger = self.__eb_energietraeger_factory.create()
+    def create(self, g_data: GData):
+        eb_energietraeger = self.__eb_energietraeger_factory.create(g_data)
         eb_sektoren = self.__eb_sektoren_factory.create()
         eb_data = self.__eb_data_factory.create(eb_energietraeger, eb_sektoren)
         return EBProcessor(eb_data)

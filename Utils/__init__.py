@@ -1,1 +1,5 @@
 from .df_extension import DFExtension
+from .df_extrapolation import DFExtrapolation
+from .df_nan_extension import DFNanExtension
+from .df_linear_extrapolation import DFLinearExtrapolation
+from .df_extrapolation_extension import DFExtrapolationExtension

@@ -27,17 +27,14 @@ def setup_nea_new_factory(g_data: Domain.General.GData):
     return nea_data_factory
 
 
-def setup_nea_pickle_factory(g_data: Domain.General.GData):
-    nea_laender_factory = Nutzenergieanalyse.NEALaenderDefaultFactory()
-    nea_laender = nea_laender_factory.create(g_data.laender)
-    nea_data_factory = Nutzenergieanalyse.NEADataPickleFactory(pathlib.Path('Data/Serialization'), nea_laender)
+def setup_nea_pickle_factory():
+    nea_data_factory = Nutzenergieanalyse.NEADataPickleFactory(pathlib.Path('Data/Serialization'))
     return nea_data_factory
 
 
 def setup_nea_processor(g_data: Domain.General.GData):
-    nea_abschnitte_factory = Nutzenergieanalyse.NEAAbschnitteDefaultFactory()
     nea_data_factory = setup_nea_new_factory(g_data)
-    factory = Processor.NEAProcessorFactory(nea_abschnitte_factory, nea_data_factory)
+    factory = Processor.NEAProcessorFactory(nea_data_factory)
     return factory.create(g_data)
 
 
@@ -50,18 +47,18 @@ def setup_eb_new_factory(g_data: Domain.General.GData):
 def setup_eb_pickle_factory(g_data: Domain.General.GData):
     eb_laender_factory = Energiebilanz.EBLaenderDefaultFactory()
     eb_laender = eb_laender_factory.create(g_data.laender)
-    eb_data_factory = Energiebilanz.EBDataPickleFactory(pathlib.Path('Data/Serialization'), eb_laender)
+    eb_data_factory = Energiebilanz.EBDataPickleFactory(pathlib.Path('Data/Serialization'))
     return eb_data_factory
 
 
 def setup_eb_processor(g_data: Domain.General.GData):
-    eb_energietraeger_factory = Energiebilanz.EBEnergietraegerDefaultFactory(g_data.energietraeger)
+    eb_energietraeger_factory = Energiebilanz.EBEnergietraegerDefaultFactory()
     eb_sektoren_factory = Energiebilanz.EBSektorenDefaultFactory(g_data.sektoren)
     eb_data_factory = setup_eb_new_factory(g_data)
 
     factory = Processor.EBProcessorFactory(eb_energietraeger_factory, eb_sektoren_factory, eb_data_factory)
 
-    return factory.create()
+    return factory.create(g_data)
 
 
 def setup_b_new_factory(g_data: Domain.General.GData):
@@ -94,11 +91,11 @@ def pickle_all(g_laender_factory: Domain.General.GLaenderFactory):
                                           g_energietraeger_factory)
     g_data = g_data_factory.create()
 
-    nea_processor = setup_nea_processor(g_data)
-    nea_processor.run_pickle_serialization()
+    #nea_processor = setup_nea_processor(g_data)
+    #nea_processor.run_pickle_serialization()
 
     eb_processor = setup_eb_processor(g_data)
     eb_processor.run_pickle_serialization()
 
-    b_processor = setup_b_processor(g_data)
-    b_processor.run_pickle_serialization()
+    #b_processor = setup_b_processor(g_data)
+    #b_processor.run_pickle_serialization()
