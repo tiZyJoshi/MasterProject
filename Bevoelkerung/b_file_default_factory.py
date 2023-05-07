@@ -9,4 +9,4 @@ class BFileDefaultFactory(BFileFactory):
         self.__path = path
 
     def create(self, laender: list[GLand]) -> BFile:
-        return BFile(self.__path / 'Bevoelkerung_Oesterreich.xlsx', laender)
+        return BFile(self.__path / 'Bevoelkerung.xlsx', laender)

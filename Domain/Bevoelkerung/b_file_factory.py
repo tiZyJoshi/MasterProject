@@ -1,4 +1,4 @@
-from Domain.Bevoelkerung import BFile
+from .b_file import BFile
 from Domain.General import GLand
 
 
