@@ -33,8 +33,14 @@ def setup_nea_pickle_factory():
     return nea_data_factory
 
 
+def setup_nea_klassen_factory():
+    pickle_factory = setup_nea_pickle_factory()
+    klassen_factory = Nutzenergieanalyse.NEADataETKlassenFactory(pickle_factory)
+    return klassen_factory
+
+
 def setup_nea_processor(g_data: Domain.General.GData):
-    nea_data_factory = setup_nea_new_factory(g_data)
+    nea_data_factory = setup_nea_klassen_factory()
     factory = Processor.NEAProcessorFactory(nea_data_factory)
     return factory.create(g_data)
 
@@ -83,18 +89,17 @@ def setup_b_processor(g_data: Domain.General.GData):
 def pickle_all(g_laender_factory: Domain.General.GLaenderFactory):
     g_sektoren_factory = General.GSektorenDefaultFactory()
     g_bereiche_factory = General.GBereicheSimpleFactory()
-    g_energietraeger_klassen_factory = General.GEnergietraegerKlassenDefaultFactory()
-    g_energietraeger_klassen = g_energietraeger_klassen_factory.create()
-    g_energietraeger_factory = General.GEnergietraegerDefaultFactory(g_energietraeger_klassen)
+    g_energietraeger_klassen_factory = General.GEnergietraegerKlassenSimpleFactory()
+    g_energietraeger_factory = General.GEnergietraegerSimpleFactory()
     g_data_factory = General.GDataFactory(g_laender_factory, g_sektoren_factory, g_bereiche_factory,
-                                          g_energietraeger_factory)
+                                          g_energietraeger_klassen_factory, g_energietraeger_factory)
     g_data = g_data_factory.create()
 
     nea_processor = setup_nea_processor(g_data)
-    nea_processor.run_pickle_serialization()
+    nea_processor.run_validation()
 
-    eb_processor = setup_eb_processor(g_data)
-    eb_processor.run_pickle_serialization()
+    #eb_processor = setup_eb_processor(g_data)
+    #eb_processor.run_pickle_serialization()
 
-    b_processor = setup_b_processor(g_data)
-    b_processor.run_pickle_serialization()
+    #b_processor = setup_b_processor(g_data)
+    #b_processor.run_pickle_serialization()

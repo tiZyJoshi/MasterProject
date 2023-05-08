@@ -4,6 +4,8 @@ from .g_bereiche_simple_factory import GBereicheSimpleFactory
 from .g_bundeslaender_factory import GBundeslaenderFactory
 from .g_data_factory import GDataFactory
 from .g_energietraeger_default_factory import GEnergietraegerDefaultFactory
+from .g_energietraeger_simple_factory import GEnergietraegerSimpleFactory
 from .g_energietraeger_klassen_default_factory import GEnergietraegerKlassenDefaultFactory
+from .g_energietraeger_klassen_simple_factory import GEnergietraegerKlassenSimpleFactory
 from .g_oesterreich_factory import GOesterreichFactory
 from .g_sektoren_default_factory import GSektorenDefaultFactory
