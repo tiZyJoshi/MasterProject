@@ -1,8 +1,7 @@
 from .eb_data import EBData
-from .eb_energietraeger import EBEnergietraeger
-from .eb_sektor import EBSektor
+from Domain.General import GData
 
 
 class EBDataFactory:
-    def create(self, energietraeger: list[EBEnergietraeger], sektoren: list[EBSektor]) -> EBData:
+    def create(self, g_data: GData) -> EBData:
         pass

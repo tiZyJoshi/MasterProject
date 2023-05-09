@@ -1,5 +1,6 @@
 from .eb_data_new_factory import EBDataNewFactory
 from .eb_data_pickle_factory import EBDataPickleFactory
+from .eb_data_et_klassen_factory import EBDataETKlassenFactory
 from .eb_data_validator import EBDataValidator
 from .eb_energietraeger_default_factory import EBEnergietraegerDefaultFactory
 from .eb_excel_serializer import EBExcelSerializer

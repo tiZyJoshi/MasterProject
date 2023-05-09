@@ -3,7 +3,7 @@ import pathlib
 import pandas as pd
 
 from Domain.General import GLand, GSektor, GData
-from Domain.Energiebilanz import EBEnergietraeger, EBData, EBDataFactory
+from Domain.Energiebilanz import EBData, EBDataFactory
 from .eb_pickle_path_factory import EBPicklePathFactory
 
 
@@ -18,6 +18,6 @@ class EBDataPickleFactory(EBDataFactory):
     def __restore_eb_dataframes(self, land: GLand, g_data: GData):
         return {sektor: self.__read_eb_pickle(land, sektor) for sektor in g_data.sektoren.values()}
 
-    def create(self, energietraeger: list[EBEnergietraeger], g_data: GData) -> EBData:
+    def create(self, g_data: GData) -> EBData:
         return EBData(
             {land: self.__restore_eb_dataframes(land, g_data) for land in g_data.laender.values()})
