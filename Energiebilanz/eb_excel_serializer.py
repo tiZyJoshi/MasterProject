@@ -12,9 +12,9 @@ class EBExcelSerializer(EBDataSerializer):
     def run(self, data: EBData):
         filename = self.__path / 'energiebilanz.xlsx'
         with pd.ExcelWriter(filename) as writer:
-            for land in data.laender:
-                for sektor in data.sektoren:
+            for land in data.data.keys():
+                for sektor in data.data[land].keys():
                     local_df = data.data[land][sektor].copy()
                     local_df.index = pd.Index((period.year for period in local_df.index), name=local_df.index.name)
-                    local_df = local_df.swapaxes("index", "columns")
+                    local_df = local_df.transpose()
                     local_df.to_excel(writer, f'{land.name[0:14]}-{sektor.name[0:14]}')

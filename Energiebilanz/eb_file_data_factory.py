@@ -26,7 +26,7 @@ class EBFileDataFactory:
                                          nrows=21)
 
                 local_df = raw_data.filter(items=list(s.name for s in sektoren), axis=0)
-                local_df = local_df.swapaxes("index", "columns")
+                local_df = local_df.transpose()
                 local_df = local_df.filter(items=list(n for n in local_df.index if type(n) == int), axis=0)
 
                 x, y = local_df.shape

@@ -1,5 +1,6 @@
 import pathlib
 import re
+import os
 
 from Domain.General import GLand
 from Domain.Energiebilanz import EBLand, EBFile, EBFilesFactory
@@ -12,7 +13,7 @@ class EBFilesDefaultFactory(EBFilesFactory):
 
     def __generate_files(self):
         for file in self.__path.glob('*.xlsx'):
-            parts = re.split('_|\.', file.name)
+            parts = re.split('_', os.path.splitext(file.name)[0])
             typ = parts[0]
             land = parts[1]
             if land not in self.__laender.keys():

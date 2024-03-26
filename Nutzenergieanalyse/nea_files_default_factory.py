@@ -1,5 +1,6 @@
 import pathlib
 import re
+import os
 
 from Domain.General import GLand
 from Domain.Nutzenergieanalyse import NEALand, NEAFile, NEAFilesFactory
@@ -12,7 +13,7 @@ class NEAFilesDefaultFactory(NEAFilesFactory):
 
     def __generate_nea_files(self):
         for file in self.__path.glob('*.xlsx'):
-            parts = re.split('_|\.', file.name)
+            parts = re.split('_', os.path.splitext(file.name)[0])
             land = parts[1]
             if land not in self.__laender.keys():
                 continue

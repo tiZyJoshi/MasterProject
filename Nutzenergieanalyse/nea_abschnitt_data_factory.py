@@ -17,13 +17,8 @@ class NEAAbschnittDataFactory:
                     continue
 
                 for sektor in abschnitt.sektoren:
-                    raw_data = pd.read_excel(xls,
-                                             sheet_name=jahr.sheet,
-                                             header=0,
-                                             index_col=0,
-                                             usecols=sektor.usecols,
-                                             skiprows=sektor.skiprows,
-                                             nrows=22)
+                    raw_data = pd.read_excel(xls, sheet_name=jahr.sheet, header=0, index_col=0, usecols=sektor.usecols,
+                                             skiprows=sektor.skiprows, nrows=22)
                     x, y = raw_data.shape
                     if len(raw_data) == 0 or x == 0 or y == 0:
                         print(f'{jahr} empty')
@@ -32,14 +27,14 @@ class NEAAbschnittDataFactory:
                     local_df.rename(index={'Erdgas (inkl. Mischgas)': 'Erdgas'}, inplace=True)
                     local_df.rename(index={'Brennholz': 'Scheitholz'}, inplace=True)
                     local_df.index = pd.Index((s.strip() for s in local_df.index), name=local_df.index.name)
-                    local_df = local_df.filter(items=list(et.name for et in abschnitt.energietraeger), axis=0).swapaxes(
-                        "index", "columns")
+                    local_df = local_df.filter(items=list(et.name for et in abschnitt.energietraeger),
+                                               axis=0).transpose()
                     local_df.index = pd.Index((b.name for b in sektor.bereiche), name=local_df.index.name)
 
-                    local_df = local_df.swapaxes("index", "columns")
+                    local_df = local_df.transpose()
                     for add_bereich in sektor.add_bereiche:
                         local_df[add_bereich.name] = np.nan
-                    local_df = local_df.swapaxes("index", "columns")
+                    local_df = local_df.transpose()
 
                     for energietraeger in abschnitt.energietraeger:
                         series = local_df[energietraeger.name]
